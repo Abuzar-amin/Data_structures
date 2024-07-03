@@ -1,4 +1,4 @@
-//program to create and view linked list by storing employee info
+
 
 # include <stdio.h>
 
