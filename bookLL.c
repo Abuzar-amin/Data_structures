@@ -42,7 +42,7 @@ int main()
     printf("Publisher:\t%s\n", b1.publisher);
     printf("Pages:\t%d\n", b1.pages);
     printf("Edition:\t%d\n", b1.edition);
-    printf("\n\n\n");
+    printf("\n");
 
     printf("Details of Book 2 are:\n");
     printf("Name:\t%s\n", b1.next->name);
@@ -50,7 +50,7 @@ int main()
     printf("Publisher:\t%s\n", b1.next->publisher);
     printf("Pages:\t%d\n", b1.next->pages);
     printf("Edition:\t%d\n", b1.next->edition);
-    printf("\n\n\n");
+    printf("\n");
 
     printf("Details of Book 3 are:\n");
     printf("Name:\t%s\n", b1.next->next->name);
@@ -58,7 +58,7 @@ int main()
     printf("Publisher:\t%s\n", b1.next->next->publisher);
     printf("Pages:\t%d\n", b1.next->next->pages);
     printf("Edition:\t%d\n", b1.next->next->edition);
-    printf("\n\n\n");
+    
 
 
 
