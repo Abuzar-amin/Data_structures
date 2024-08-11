@@ -28,7 +28,7 @@ void del(int A[], int e, int *n )
 int main()
 {
     int n,e, index;
-    printf("Enter size of the array\n");
+    printf("Enter size of the array ");
     scanf("%d", &n);
 
     int *A = (int *)malloc(sizeof(int) * n);
@@ -42,7 +42,7 @@ int main()
     {
         printf("%d\t", A[i]);
     }
-    printf("Enter the element to be deleted from the array\n");
+    printf("Enter the element to be deleted from the array ");
     scanf("%d", &e);
 
     for(int i = 0; i <= n; i++)
@@ -51,7 +51,7 @@ int main()
             del(A, e, &n);
             i--;}
     }
-    printf("After deleting, the array is: \n");
+    printf("After deletion, the array is: \n");
     for(int i = 0; i < n; i++)
     {
         printf("%d\t", A[i]);
