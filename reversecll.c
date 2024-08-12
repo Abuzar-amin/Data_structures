@@ -1,87 +1,83 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct node {
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    struct node *prev; 
     int data;
     struct node *next;
+
 };
-
-struct node *head = NULL, *tail = NULL;
-
-// Function to create a circular linked list
-void create() {
-    int n, i;
-    struct node *temp;
-    printf("Enter number of nodes: ");
-    scanf("%d", &n);
+struct node *head=NULL,*tail=NULL;
+void create()
+{
+    int n;
+    printf("Enter number of nodes ");
+    scanf("%d",&n);
     
-    for(i = 0; i < n; i++) {
-        temp = (struct node *)malloc(sizeof(struct node));
-        printf("Enter node: ");
-        scanf("%d", &temp->data);
-        temp->next = NULL;
+    for(int i = 0; i < n; i++)
+    {
+        struct node *temp;
+        temp = (struct node*)malloc(sizeof(struct node));
+        temp->next=NULL;
+        printf("enter the node: ");
+        scanf("%d",&temp->data);
+        temp->prev=temp->next=NULL;
 
-        if(head == NULL) {
-            head = tail = temp;
-            head->next = head; // Making it circular
-        } else {
-            tail->next = temp;
-            temp->next = head;
+        if(head == NULL)
+        {
+            head = temp;
             tail = temp;
         }
+        else
+        {
+            tail->next = temp;
+            
+            temp->prev=tail;
+            tail=temp;
+        }
+        
     }
-}
-
-// Function to view the circular linked list
-void view() {
-    if (head == NULL) {
-        printf("The list is empty.\n");
-        return;
-    }
-
-    struct node *trav = head;
-    printf("Circular Linked List: ");
     
-    do {
-        printf("%d ", trav->data);
-        trav = trav->next;
-    } while(trav != head);
+}
+void view()
+{
     printf("\n");
-}
-
-// Function to reverse the circular linked list
-void reverse() {
-    if (head == NULL || head->next == head) {
-        // List is empty or has only one element, no need to reverse
-        return;
+    struct node *trav;
+    
+    trav=head;
+    while(trav!=NULL)
+    {
+     printf("%d",trav->data);
+     trav=trav->next;
     }
 
-    struct node *prev = tail, *current = head, *next = NULL;
-
-    do {
-        next = current->next;
-        current->next = prev;
-
-        prev = current;
-        current = next;
-    } while (current != head);
-
-    // Adjusting head and tail pointers
-    tail = head;
-    head = prev;
-
-    // Reconnect tail to the new head to maintain circularity
-    tail->next = head;
 }
 
-int main() {
+void reverse()
+{
+    struct node *q,*p;
+    
+        p=head;
+        while(p!=NULL){
+            q=p->next;
+            p->next=p->prev;
+            p->prev=q;
+            p=q;
+        }
+       p=head;
+       head=tail;
+       tail=p;
+        
+}
+int main()
+{
+
     create();
-    printf("Original list:\n");
     view();
-    
     reverse();
-    printf("Reversed list:\n");
     view();
+       
+   
+   
     
-    return 0;
 }
