@@ -26,8 +26,9 @@ void create()
         if(head == NULL)
         {
             head = tail = temp;
-            head->next = head->prev = head; // Making it circular
-        } else
+            head->next = head->prev = head; 
+        } 
+        else
         {
             tail->next = temp;
             temp->prev = tail;
@@ -40,12 +41,6 @@ void create()
 
 void view()
 {
-    if (head == NULL) 
-    {
-        printf("The list is empty.\n");
-        return;
-    }
-
     struct node *trav = head;
     printf("\nCircular Doubly Linked List: ");
     
@@ -79,7 +74,7 @@ void insert()
             if(trav == tail) {
                 tail = temp;
             }
-            printf("Element %d inserted successfully.\n", item);
+            
             return;
         }
         trav = trav->next;
@@ -112,7 +107,6 @@ void delete()
             { 
                 head = tail = NULL;
                 free(temp);
-                printf("Element %d deleted successfully.\n", element);
                 return;
             }
 
@@ -137,7 +131,8 @@ void delete()
             trav = trav->next;
             free(temp);
             return;
-        } else {
+        } else
+        {
             trav = trav->next;
         }
     } 
