@@ -3,7 +3,7 @@
 
 struct node {
     int data;
-    struct node *next, *prev;
+    struct node *next;
 };
 
 struct node *head = NULL, *tail = NULL;
@@ -18,16 +18,14 @@ void create() {
         temp = (struct node *)malloc(sizeof(struct node));
         printf("Enter node: ");
         scanf("%d", &temp->data);
-        temp->prev = temp->next = NULL;
+        temp->next = NULL;
 
         if (head == NULL) {
             head = tail = temp;
-            head->next = head->prev = head;
+            head->next = head; 
         } else {
             tail->next = temp;
-            temp->prev = tail;
             temp->next = head;
-            head->prev = temp;
             tail = temp;
         }
     }
@@ -40,13 +38,13 @@ void view() {
     }
 
     struct node *trav = head;
-    printf("\nCircular Doubly Linked List: ");
+    printf("\nCircular Linked List: ");
 
     while (trav->next != head) {
         printf("%d ", trav->data);
         trav = trav->next;
     }
-    printf("%d\n", trav->data); // Print the last node
+    printf("%d\n", trav->data);  
 }
 
 void insert() {
@@ -60,9 +58,7 @@ void insert() {
     while (trav->next != head) {
         if (trav->data == element) {
             temp->data = item;
-            temp->prev = trav;
             temp->next = trav->next;
-            trav->next->prev = temp;
             trav->next = temp;
 
             if (trav == tail) {
@@ -74,12 +70,11 @@ void insert() {
         trav = trav->next;
     }
 
+    
     if (trav->data == element) {
         temp->data = item;
-        temp->prev = trav;
         temp->next = head;
         trav->next = temp;
-        head->prev = temp;
         tail = temp;
     } else {
         printf("Element %d not found.\n", element);
@@ -91,42 +86,15 @@ void delete() {
     printf("Enter element you want to delete: ");
     scanf("%d", &element);
     struct node *trav = head;
-
-    if (head == NULL) {
-        printf("The list is empty.\n");
-        return;
-    }
-
-    while (trav->next != head) {
-        if (trav->data == element) {
-            if (trav == head) {
-                head = trav->next;
-                head->prev = tail;
-                tail->next = head;
-            } else {
-                trav->prev->next = trav->next;
-                trav->next->prev = trav->prev;
-            }
-
-            free(trav);
-            return;
-        }
+    while (trav->next != head && trav->next->data != element) {
         trav = trav->next;
     }
 
-   
-    if (trav->data == element) {
-        if (trav == head && trav == tail) { 
-            head = tail = NULL;
-        } else {
-            tail = trav->prev;
-            tail->next = head;
-            head->prev = tail;
-        }
+    if (trav->next->data == element) {
+        struct node *temp = trav->next;
+        trav->next = temp->next;
 
-        free(trav);
-    } else {
-        printf("Element %d not found.\n", element);
+        free(temp);
     }
 }
 
@@ -142,3 +110,4 @@ int main() {
 
     return 0;
 }
+
